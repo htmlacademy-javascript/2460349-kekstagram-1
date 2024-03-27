@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Валерия Киселева](https://up.htmlacademy.ru/javascript-individual/1/user/2460349).
-* Наставник: `Неизвестно`.
+* Наставник: [Павел Ившин](https://htmlacademy.ru/profile/id818775)
 
 ---
 
