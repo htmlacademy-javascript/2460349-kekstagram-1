@@ -56,7 +56,7 @@ const getUserComments = () => {
 
 const createPicture = (index) => ({
   id: index,
-  url: `photos/${index}.ipg`,
+  url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: getUserComments(),
