@@ -1,3 +1,4 @@
 import { pictures } from './data.js';
+import { makePictures } from './previews.js';
 
-//console.log(pictures);
+makePictures(pictures);
