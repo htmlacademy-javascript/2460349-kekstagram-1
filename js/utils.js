@@ -4,4 +4,8 @@ function createIdGenerator (prefix = '') {
   return () => prefix + (lastGeneratedId += 1);
 }
 
-export { createIdGenerator };
+function isEscKey (evt) {
+  return evt.key === 'Escape';
+}
+
+export { createIdGenerator, isEscKey };
