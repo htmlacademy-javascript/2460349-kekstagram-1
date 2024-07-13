@@ -8,12 +8,20 @@ const bigPictureImg = fullSizePopupContainer.querySelector('.big-picture__img').
 const postDescription = fullSizePopupContainer.querySelector('.social__caption');
 const likesCount = fullSizePopupContainer.querySelector('.likes-count');
 
-const commentsCount = fullSizePopupContainer.querySelector('.comments-count');
+const currentCommentsCount = fullSizePopupContainer.querySelector('.social__comment-count');
+const amountCommentsCount = fullSizePopupContainer.querySelector('.comments-count');
 
 const socialCommentsContainer = fullSizePopupContainer.querySelector('.social__comments');
 const postComment = fullSizePopupContainer.querySelector('.social__comment');
 
 const closePopupButton = fullSizePopupContainer.querySelector('#picture-cancel');
+
+const loadMoreButton = fullSizePopupContainer.querySelector('.social__comments-loader');
+
+const COMMENT_LIMIT = 5;
+let displayedCommentsCount;
+
+const getComments = () => Array.from(socialCommentsContainer.children);
 
 const renderComment = function (comment) {
   const userComment = postComment.cloneNode(true);
@@ -23,10 +31,7 @@ const renderComment = function (comment) {
   return userComment;
 };
 
-const clearComments = () => {
-  const currentComments = socialCommentsContainer.querySelectorAll('.social__comment');
-  currentComments.forEach((element) => element.remove());
-};
+const clearComments = () => getComments().forEach((element) => element.remove());
 
 const makeComments = function (comments) {
   const commentFragment = document.createDocumentFragment();
@@ -35,9 +40,42 @@ const makeComments = function (comments) {
     commentFragment.append(renderComment(comment));
   });
 
+  const commentsCount = commentFragment.children.length;
+
   clearComments();
   socialCommentsContainer.append(commentFragment);
+
+  displayedCommentsCount = Math.min(COMMENT_LIMIT, commentsCount);
+
+  getComments().slice(COMMENT_LIMIT, socialCommentsContainer.children.length).forEach((el) => el.classList.add('hidden'));
+  if (commentsCount <= COMMENT_LIMIT) {
+    hideCommentsLoader();
+    currentCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${commentsCount}</span> комментариев`;
+  } else {
+    showCommentsLoader ();
+    currentCommentsCount.innerHTML = `${COMMENT_LIMIT} из <span class="comments-count">${commentsCount}</span> комментариев`;
+  }
 };
+
+function loadMoreComments () {
+  const comments = getComments();
+  const updatedCommentsCount = Math.min(displayedCommentsCount + COMMENT_LIMIT, comments.length);
+  comments.slice(displayedCommentsCount, updatedCommentsCount).forEach((el) => el.classList.remove('hidden'));
+  if (comments.length === updatedCommentsCount) {
+    hideCommentsLoader();
+  }
+  currentCommentsCount.innerHTML = currentCommentsCount.innerHTML.replace(displayedCommentsCount, updatedCommentsCount);
+
+  displayedCommentsCount = updatedCommentsCount;
+}
+
+function showCommentsLoader () {
+  loadMoreButton.classList.remove('hidden');
+}
+
+function hideCommentsLoader () {
+  loadMoreButton.classList.add('hidden');
+}
 
 const escapePressHander = (evt) => {
   if (isEscKey(evt)) {
@@ -59,21 +97,24 @@ const openPopup = () => {
   pageBody.classList.add('modal-open');
   closePopupButton.addEventListener('click', closePopup);
   document.addEventListener('keydown', escapePressHander);
+  loadMoreButton.addEventListener('click', loadMoreComments);
 
-  fullSizePopupContainer.querySelector('.social__comment-count').classList.add('hidden');
-  fullSizePopupContainer.querySelector('.comments-loader').classList.add('hidden');
 };
 
 const showPhotoPopup = (post) => {
   openPopup();
   bigPictureImg.src = post.url;
   likesCount.textContent = post.likes;
-  commentsCount.textContent = post.comments.length;
+  amountCommentsCount.textContent = post.comments.length;
   postDescription.textContent = post.description;
   makeComments(post.comments);
 };
 
 const previewClickHandler = (evt) => {
+  if (!evt.target.classList.contains('picture__img')) {
+    return;
+  }
+
   const linkElements = picturesContainer.querySelectorAll('.picture');
   const imageLink = evt.target.parentElement;
   const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
