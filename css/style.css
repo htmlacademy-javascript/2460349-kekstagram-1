@@ -1335,7 +1335,12 @@ main {
           transform: translateX(-50%);
 }
 
-
+.form__error {
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  text-align: center;
+}
 /* Адаптивности чуток
    ========================================================================== */
 

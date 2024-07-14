@@ -47,7 +47,9 @@ const makeComments = function (comments) {
 
   displayedCommentsCount = Math.min(COMMENT_LIMIT, commentsCount);
 
-  getComments().slice(COMMENT_LIMIT, socialCommentsContainer.children.length).forEach((el) => el.classList.add('hidden'));
+  const commentsList = getComments();
+
+  commentsList.slice(COMMENT_LIMIT, socialCommentsContainer.children.length).forEach((el) => el.classList.add('hidden'));
   if (commentsCount <= COMMENT_LIMIT) {
     hideCommentsLoader();
     currentCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${commentsCount}</span> комментариев`;
