@@ -7,8 +7,8 @@ const uploadForm = document.querySelector('.img-upload__form');
 const closeButton = document.querySelector('.img-upload__cancel');
 
 const onEscapePress = (evt) => {
-  const activeElemet = document.activeElement.className;
-  if (isEscKey(evt) && activeElemet !== 'text__hashtags' && activeElemet !== 'text__description') {
+  const activeElementClass = document.activeElement.className;
+  if (isEscKey(evt) && activeElementClass !== 'text__hashtags' && activeElementClass !== 'text__description') {
     evt.preventDefault();
     closePopup();
   }
