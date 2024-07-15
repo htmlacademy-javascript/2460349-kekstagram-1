@@ -1,4 +1,6 @@
 import { isEscKey } from './utils.js';
+import { resetScaleDefault, settingScale } from './scale-photo-upload.js';
+import { resetEffect } from './effects-photo-upload.js';
 
 const pageBody = document.body;
 const uploadContainer = document.querySelector('.img-upload__overlay');
@@ -16,6 +18,7 @@ const onEscapePress = (evt) => {
 
 const resetForm = () => {
   uploadForm.reset();
+  resetScaleDefault();
 };
 
 uploadFile.addEventListener('change', onUploadChange);
@@ -34,6 +37,8 @@ function closePopup () {
 }
 
 function openPopup () {
+  resetEffect();
+  settingScale();
   uploadContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
   document.addEventListener('keydown', onEscapePress);
