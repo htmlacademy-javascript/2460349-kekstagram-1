@@ -29,4 +29,5 @@ const onValidateSubmit = (evt) => {
     evt.preventDefault();
   }
 };
-form.addEventListener('submit', onValidateSubmit)
+
+form.addEventListener('submit', onValidateSubmit);
