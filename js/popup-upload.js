@@ -1,5 +1,5 @@
 import { isEscKey } from './utils.js';
-import { resetScaleDefault, settingScale } from './scale-photo-upload.js';
+import { resetScaleDefault, resizeScale } from './scale-photo-upload.js';
 import { resetEffect } from './effects-photo-upload.js';
 
 const pageBody = document.body;
@@ -8,7 +8,7 @@ const uploadFile = document.querySelector('#upload-file');
 const uploadForm = document.querySelector('.img-upload__form');
 const closeButton = document.querySelector('.img-upload__cancel');
 
-const onEscapePress = (evt) => {
+const onDocumentKeydown = (evt) => {
   const activeElementClass = document.activeElement.className;
   if (isEscKey(evt) && activeElementClass !== 'text__hashtags' && activeElementClass !== 'text__description') {
     evt.preventDefault();
@@ -32,18 +32,20 @@ function onCloseButtonClick (evt) {
 function closePopup () {
   uploadContainer.classList.add('hidden');
   pageBody.classList.remove('modal-open');
-  document.removeEventListener('keydown', onEscapePress);
+  document.removeEventListener('keydown', onDocumentKeydown);
   resetForm();
 }
 
 function openPopup () {
   resetEffect();
-  settingScale();
+  resizeScale();
   uploadContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
-  document.addEventListener('keydown', onEscapePress);
+  document.addEventListener('keydown', onDocumentKeydown);
 }
 
 function onUploadChange () {
   openPopup();
 }
+
+export {closePopup, onDocumentKeydown};
