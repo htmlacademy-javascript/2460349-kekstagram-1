@@ -1,6 +1,5 @@
-import { showAlert } from './utils.js';
 import { sendData } from './api.js';
-import { createMessage, deleteMessage } from './message.js';
+import { createMessage } from './message.js';
 
 const form = document.querySelector('.img-upload__form');
 const inputHashtags = document.querySelector('.text__hashtags');

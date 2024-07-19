@@ -1,5 +1,5 @@
 import { isEscKey } from './utils.js';
-import { resetScaleDefault, resetScale } from './scale-photo-upload.js';
+import { resetScaleDefault, resizeScale } from './scale-photo-upload.js';
 import { resetEffect } from './effects-photo-upload.js';
 
 const pageBody = document.body;
@@ -38,7 +38,7 @@ function closePopup () {
 
 function openPopup () {
   resetEffect();
-  resetScale();
+  resizeScale();
   uploadContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
