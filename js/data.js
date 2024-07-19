@@ -1,5 +1,6 @@
-import { getPictures } from './mocks.js';
+// import { данные с сервера } from './mocks.js';
 
-const pictures = getPictures();
+// const pictures = данные с сервера();
 
-export {pictures};
+// export {pictures};
+

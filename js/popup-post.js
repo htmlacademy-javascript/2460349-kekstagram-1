@@ -1,4 +1,4 @@
-import { pictures } from './data.js';
+import { photosArr } from './main.js';
 import { isEscKey } from './utils.js';
 
 const pageBody = document.body;
@@ -120,9 +120,10 @@ const previewClickHandler = (evt) => {
   const linkElements = picturesContainer.querySelectorAll('.picture');
   const imageLink = evt.target.parentElement;
   const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
-  const bigPictureData = pictures[imageIndex];
-
+  const bigPictureData = photosArr[imageIndex];
   showPhotoPopup(bigPictureData);
 };
 
 picturesContainer.addEventListener('click', previewClickHandler);
+
+

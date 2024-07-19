@@ -34,10 +34,10 @@ const resetScaleDefault = () => {
   uploadImage.style.transform = 'scale(1)';
 };
 
-const settingScale = () => {
+const resetScale = () => {
   resetScaleDefault();
   scaleSmallerButton.addEventListener('click', onSmallerButtonClick);
   scaleBiggerButton.addEventListener('click', onBiggerButtonClick);
 };
 
-export { resetScaleDefault, settingScale };
+export { resetScaleDefault, resetScale };
