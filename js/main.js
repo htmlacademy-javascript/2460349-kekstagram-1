@@ -6,6 +6,7 @@ import {makePictures} from './previews.js';
 import { showAlert } from './utils.js';
 import {closePopup} from './popup-upload.js';
 import {setUserFormSubmit} from './validator.js';
+import {showFilteredPictures} from './filter-previews.js';
 
 const photosArr = [];
 
@@ -16,6 +17,7 @@ getData()
       photosArr.push(element);
     });
     makePictures(photos);
+    showFilteredPictures(photos);
   })
   .catch(
     (err) => {
