@@ -1,20 +1,20 @@
 import './popup-post.js';
-import './popup-upload.js';
+import './upload-photo.js';
 import './effects-photo-upload.js';
 import { getData } from './api.js';
-import {makePictures} from './previews.js';
+import { makePictures } from './previews.js';
 import { showAlert } from './utils.js';
-import {closePopup} from './popup-upload.js';
-import {setUserFormSubmit} from './validator.js';
-import {showFilteredPictures} from './filter-previews.js';
+import { closePopup } from './popup-upload.js';
+import { setUserFormSubmit } from './validator.js';
+import { showFilteredPictures } from './filter-previews.js';
 
-const photosArr = [];
+const photosArray = [];
 
 getData()
   .then((photos) => {
     const objArr = Array.from(photos);
     objArr.forEach((element) => {
-      photosArr.push(element);
+      photosArray.push(element);
     });
     makePictures(photos);
     showFilteredPictures(photos);
@@ -27,4 +27,4 @@ getData()
 
 setUserFormSubmit(closePopup);
 
-export { photosArr };
+export { photosArray };

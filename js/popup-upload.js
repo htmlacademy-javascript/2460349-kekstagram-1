@@ -4,7 +4,7 @@ import { resetEffect } from './effects-photo-upload.js';
 
 const pageBody = document.body;
 const uploadContainer = document.querySelector('.img-upload__overlay');
-const uploadFile = document.querySelector('#upload-file');
+const uploadFileInput = document.querySelector('#upload-file');
 const uploadForm = document.querySelector('.img-upload__form');
 const closeButton = document.querySelector('.img-upload__cancel');
 
@@ -21,9 +21,6 @@ const resetForm = () => {
   resetScaleDefault();
 };
 
-uploadFile.addEventListener('change', onUploadChange);
-closeButton.addEventListener('click', onCloseButtonClick);
-
 function onCloseButtonClick (evt) {
   evt.preventDefault();
   closePopup ();
@@ -36,16 +33,15 @@ function closePopup () {
   resetForm();
 }
 
-function openPopup () {
+const onUploadChange = () => {
   resetEffect();
   resizeScale();
   uploadContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-}
+};
 
-function onUploadChange () {
-  openPopup();
-}
+uploadFileInput.addEventListener('change', onUploadChange);
+closeButton.addEventListener('click', onCloseButtonClick);
 
 export {closePopup, onDocumentKeydown};

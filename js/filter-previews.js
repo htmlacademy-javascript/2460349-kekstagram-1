@@ -1,6 +1,5 @@
 import { makePictures } from './previews.js';
-import { debounce } from './utils.js';
-import { shuffle } from './random.js';
+import { debounce, shuffle } from './utils.js';
 
 const RANDOM_NUMBER_PICTURES = 10;
 
@@ -8,7 +7,6 @@ const filtersContainer = document.querySelector('.img-filters');
 const defaultButton = document.querySelector('#filter-default');
 const randomButton = document.querySelector('#filter-random');
 const discussedButton = document.querySelector('#filter-discussed');
-
 
 const comparePictures = (picA, picB) => {
   const rankA = picA.comments.length;
