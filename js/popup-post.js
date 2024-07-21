@@ -1,4 +1,4 @@
-import { photosArr } from './main.js';
+import { photosArray } from './main.js';
 import { isEscKey } from './utils.js';
 
 const pageBody = document.body;
@@ -7,15 +7,11 @@ const fullSizePopupContainer = document.querySelector('.big-picture');
 const bigPictureImg = fullSizePopupContainer.querySelector('.big-picture__img').querySelector('img');
 const postDescription = fullSizePopupContainer.querySelector('.social__caption');
 const likesCount = fullSizePopupContainer.querySelector('.likes-count');
-
 const currentCommentsCount = fullSizePopupContainer.querySelector('.social__comment-count');
 const amountCommentsCount = fullSizePopupContainer.querySelector('.comments-count');
-
 const socialCommentsContainer = fullSizePopupContainer.querySelector('.social__comments');
 const postComment = fullSizePopupContainer.querySelector('.social__comment');
-
 const closePopupButton = fullSizePopupContainer.querySelector('#picture-cancel');
-
 const loadMoreButton = fullSizePopupContainer.querySelector('.social__comments-loader');
 
 const COMMENT_LIMIT = 5;
@@ -32,6 +28,14 @@ const renderComment = function (comment) {
 };
 
 const clearComments = () => getComments().forEach((element) => element.remove());
+
+const showCommentsLoader = () => {
+  loadMoreButton.classList.remove('hidden');
+};
+
+const hideCommentsLoader = () => {
+  loadMoreButton.classList.add('hidden');
+};
 
 const makeComments = function (comments) {
   const commentFragment = document.createDocumentFragment();
@@ -59,7 +63,7 @@ const makeComments = function (comments) {
   }
 };
 
-function loadMoreComments () {
+const loadMoreComments = () => {
   const comments = getComments();
   const updatedCommentsCount = Math.min(displayedCommentsCount + COMMENT_LIMIT, comments.length);
   comments.slice(displayedCommentsCount, updatedCommentsCount).forEach((el) => el.classList.remove('hidden'));
@@ -69,36 +73,28 @@ function loadMoreComments () {
   currentCommentsCount.innerHTML = currentCommentsCount.innerHTML.replace(displayedCommentsCount, updatedCommentsCount);
 
   displayedCommentsCount = updatedCommentsCount;
-}
+};
 
-function showCommentsLoader () {
-  loadMoreButton.classList.remove('hidden');
-}
-
-function hideCommentsLoader () {
-  loadMoreButton.classList.add('hidden');
-}
-
-const escapePressHander = (evt) => {
+const onDocumentKeydown = (evt) => {
   if (isEscKey(evt)) {
     evt.preventDefault();
-    closePopup();
+    onClosePopupButtonClick();
   }
 };
 
-function closePopup () {
+function onClosePopupButtonClick () {
   fullSizePopupContainer.classList.add('hidden');
   pageBody.classList.remove('modal-open');
 
-  closePopupButton.removeEventListener('click', closePopup);
-  document.removeEventListener('keydown', escapePressHander);
+  closePopupButton.removeEventListener('click', onClosePopupButtonClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 const openPopup = () => {
   fullSizePopupContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
-  closePopupButton.addEventListener('click', closePopup);
-  document.addEventListener('keydown', escapePressHander);
+  closePopupButton.addEventListener('click', onClosePopupButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
   loadMoreButton.addEventListener('click', loadMoreComments);
 
 };
@@ -112,7 +108,7 @@ const showPhotoPopup = (post) => {
   makeComments(post.comments);
 };
 
-const previewClickHandler = (evt) => {
+const onPicturesContainerClick = (evt) => {
   if (!evt.target.classList.contains('picture__img')) {
     return;
   }
@@ -120,10 +116,10 @@ const previewClickHandler = (evt) => {
   const linkElements = picturesContainer.querySelectorAll('.picture');
   const imageLink = evt.target.parentElement;
   const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
-  const bigPictureData = photosArr[imageIndex];
+  const bigPictureData = photosArray[imageIndex];
   showPhotoPopup(bigPictureData);
 };
 
-picturesContainer.addEventListener('click', previewClickHandler);
+picturesContainer.addEventListener('click', onPicturesContainerClick);
 
 

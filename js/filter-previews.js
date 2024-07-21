@@ -9,7 +9,6 @@ const defaultButton = document.querySelector('#filter-default');
 const randomButton = document.querySelector('#filter-random');
 const discussedButton = document.querySelector('#filter-discussed');
 
-
 const comparePictures = (picA, picB) => {
   const rankA = picA.comments.length;
   const rankB = picB.comments.length;

@@ -1,15 +1,5 @@
 const ALERT_SHOW_TIME = 10000;
 
-function createIdGenerator (prefix = '') {
-  let lastGeneratedId = 0;
-
-  return () => prefix + (lastGeneratedId += 1);
-}
-
-function isEscKey (evt) {
-  return evt.key === 'Escape';
-}
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -31,6 +21,10 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+function isEscKey (evt) {
+  return evt.key === 'Escape';
+}
+
 function debounce (callback, timeoutDelay = 500) {
   let timeoutId;
 
@@ -40,4 +34,4 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-export { createIdGenerator, isEscKey, showAlert, debounce};
+export { isEscKey, showAlert, debounce };

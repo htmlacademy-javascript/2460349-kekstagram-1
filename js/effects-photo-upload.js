@@ -13,7 +13,7 @@ const Effects = {
   HEAT: 'heat'
 };
 
-const effectsToFilterName = {
+const EffectsToFilterName = {
   [Effects.NONE]: 'none',
   [Effects.SEPIA]: 'sepia',
   [Effects.CHROM]: 'grayscale',
@@ -83,7 +83,7 @@ const setEffect = (currentEffect) => {
   sliderElement.noUiSlider.updateOptions(EFFECT_CONFIG[currentEffect]);
 };
 
-const onEffectClick = (evt) => {
+const onEffectsContainerClick = (evt) => {
   if (evt.target.classList.contains('effects__radio')) {
     const currentEffect = evt.target.value;
     setEffect(currentEffect);
@@ -109,7 +109,7 @@ const setIntensityEffect = (value) => {
     sliderContainer.classList.add('hidden');
   } else {
     sliderContainer.classList.remove('hidden');
-    uploadImage.style.filter = `${effectsToFilterName[currentEffect]}(${value}${getUnitsEffect(currentEffect)})`;
+    uploadImage.style.filter = `${EffectsToFilterName[currentEffect]}(${value}${getUnitsEffect(currentEffect)})`;
   }
 };
 
@@ -119,6 +119,6 @@ sliderElement.noUiSlider.on('update', () => {
   setIntensityEffect(value);
 });
 
-effectsContainer.addEventListener('click', onEffectClick);
+effectsContainer.addEventListener('click', onEffectsContainerClick);
 
 export { resetEffect };

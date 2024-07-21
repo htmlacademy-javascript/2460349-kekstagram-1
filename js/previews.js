@@ -21,4 +21,4 @@ const makePictures = function (photos) {
   pictures.append(fragment);
 };
 
-export{makePictures};
+export{ makePictures };

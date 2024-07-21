@@ -5,7 +5,7 @@ const successTemplate = document.querySelector('#success').content.querySelector
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
 
-const messageType = {
+const MessageType = {
   error: errorTemplate,
   success: successTemplate,
 };
@@ -32,7 +32,7 @@ function deleteMessage () {
 }
 
 const createMessage = (value) => {
-  const messageElement = messageType[value].cloneNode(true);
+  const messageElement = MessageType[value].cloneNode(true);
   document.body.appendChild(messageElement);
   messageElement.classList.add('message');
   document.addEventListener('click', onDocumentClick);
