@@ -1,4 +1,3 @@
-import { pictures } from './main.js';
 import { isEscKey } from './utils.js';
 
 const pageBody = document.body;
@@ -108,18 +107,23 @@ const showPhotoPopup = (post) => {
   makeComments(post.comments);
 };
 
-const onPicturesContainerClick = (evt) => {
-  if (!evt.target.classList.contains('picture__img')) {
-    return;
-  }
 
-  const linkElements = picturesContainer.querySelectorAll('.picture');
-  const imageLink = evt.target.parentElement;
-  const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
-  const bigPictureData = pictures[imageIndex];
-  showPhotoPopup(bigPictureData);
+const addGalleryListener = (photos) => {
+  const onPicturesContainerClick = (evt) => {
+    if (!evt.target.classList.contains('picture__img')) {
+      return;
+    }
+
+    const linkElements = picturesContainer.querySelectorAll('.picture');
+    const imageLink = evt.target.parentElement;
+    const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
+    const bigPictureData = photos[imageIndex];
+    showPhotoPopup(bigPictureData);
+  };
+
+  picturesContainer.addEventListener('click', onPicturesContainerClick);
 };
 
-picturesContainer.addEventListener('click', onPicturesContainerClick);
+export { addGalleryListener };
 
 
