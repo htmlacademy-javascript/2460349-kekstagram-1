@@ -7,16 +7,12 @@ import { showAlert } from './utils.js';
 import { closePopup } from './popup-upload.js';
 import { setUserFormSubmit } from './validator.js';
 import { showFilteredPictures } from './filter-previews.js';
-
-const photosArray = [];
+import { addGalleryListener } from './popup-post.js';
 
 getData()
   .then((photos) => {
-    const objArr = Array.from(photos);
-    objArr.forEach((element) => {
-      photosArray.push(element);
-    });
     makePictures(photos);
+    addGalleryListener(photos);
     showFilteredPictures(photos);
   })
   .catch(
@@ -26,5 +22,3 @@ getData()
   );
 
 setUserFormSubmit(closePopup);
-
-export { photosArray };
