@@ -1,4 +1,4 @@
-import { photosArray } from './main.js';
+import { pictures } from './main.js';
 import { isEscKey } from './utils.js';
 
 const pageBody = document.body;
@@ -116,7 +116,7 @@ const onPicturesContainerClick = (evt) => {
   const linkElements = picturesContainer.querySelectorAll('.picture');
   const imageLink = evt.target.parentElement;
   const imageIndex = Array.from(linkElements).findIndex((el) => el === imageLink);
-  const bigPictureData = photosArray[imageIndex];
+  const bigPictureData = pictures[imageIndex];
   showPhotoPopup(bigPictureData);
 };
 

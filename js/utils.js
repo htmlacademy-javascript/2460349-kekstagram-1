@@ -21,9 +21,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-function isEscKey (evt) {
-  return evt.key === 'Escape';
-}
+const isEscKey = (evt) => evt.key === 'Escape';
 
 function debounce (callback, timeoutDelay = 500) {
   let timeoutId;
