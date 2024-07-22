@@ -41,6 +41,10 @@ const validateRepeat = (value) => {
 pristine.addValidator (inputHashtags, validateHashtags, 'Никаких спецсимволов, длина одного хеш-тега не более 20 символов и до 5 штук', 1);
 pristine.addValidator (inputHashtags, validateRepeat, 'Хеш-теги не должны повторяться', 2);
 
+const resetValidator = () => {
+  pristine.reset();
+};
+
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -62,4 +66,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export { setUserFormSubmit };
+export { resetValidator, setUserFormSubmit };
