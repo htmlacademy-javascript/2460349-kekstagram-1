@@ -1,6 +1,7 @@
 import { isEscKey } from './utils.js';
 import { resetScaleDefault, resizeScale } from './scale-photo-upload.js';
 import { resetEffect } from './effects-photo-upload.js';
+import { resetValidator } from './validator.js';
 
 const pageBody = document.body;
 const uploadContainer = document.querySelector('.img-upload__overlay');
@@ -19,6 +20,7 @@ const onDocumentKeydown = (evt) => {
 const resetForm = () => {
   uploadForm.reset();
   resetScaleDefault();
+  resetValidator();
 };
 
 function onCloseButtonClick (evt) {
